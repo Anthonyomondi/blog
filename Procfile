@@ -1,0 +1,1 @@
+web: gunicorn tony_blog.wsgi --log-file -

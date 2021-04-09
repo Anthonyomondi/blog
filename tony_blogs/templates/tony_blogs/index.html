@@ -1,0 +1,31 @@
+{% extends "tony_blogs/base.html" %}
+
+{% block page_header %}
+<div class="jumbotron">
+  <h1 class="display-3">Post your blog.</h1>
+
+  <p class="lead">"Tell me and I forget. Teach me and I remember.
+    Involve me and I learn." -Benjamin Franklin</p>
+
+  <a class="btn btn-lg btn-primary" href="{% url 'tony_blogs:new_blog' %}" role="button">Start &Rarr;</a>
+</div>
+
+<div class="container">
+  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
+    sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec,
+    pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec,
+    vulputate eget, arcu.</p>
+
+  <p>In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer
+    tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
+    porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus.
+  </p>
+
+  <p>Exorcizamus te, omnis immundus spiritus, omnis satanica potestas, omnis incursio infernalis adversarii, omnis
+    legio, omnis congregatio et secta diabolica. Ergo, omnis legio diabolica, adiuramus te...cessa decipere humanas
+    creaturas, eisque æternæ perditionìs venenum propinare...Vade, satana, inventor et magister omnis fallaciæ, hostis
+    humanæ salutis...Humiliare sub potenti manu Dei; contremisce et effuge, invocato a nobis sancto et terribili
+    nomine...quem inferi tremunt...Ab insidiis diaboli, libera nos, Domine. Ut Ecclesiam tuam secura tibi facias
+    libertate servire, te rogamus, audi nos.</p>
+</div>
+{% endblock page_header %}

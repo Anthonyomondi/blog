@@ -1,0 +1,17 @@
+{% extends "tony_blogs/base.html" %}
+{% load bootstrap4 %}
+
+{% block page_header %}
+<h2>Register new account.</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+<form method="post" action="{% url 'users:register' %}">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+
+  <button name="submit" class="btn btn-success">Register</button>
+  <input type="hidden" name="next" value="{% url 'tony_blogs:index' %}" />
+</form>
+{% endblock content %}

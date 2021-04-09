@@ -1,0 +1,16 @@
+{% extends "tony_blogs/base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<h2>
+  <p>Add a new blog:</p>
+</h2>
+
+<form action="{% url 'tony_blogs:new_blog' %}" method='post'>
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  <button name="submit" class="btn btn-primary">Add blog</button>
+</form>
+
+{% endblock content %}
