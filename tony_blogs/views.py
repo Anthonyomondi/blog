@@ -1,4 +1,4 @@
-from django.shortcuts import (render, redirect)
+from django.shortcuts import (render, redirect, get_object_or_404)
 from django.contrib.auth.decorators import login_required
 
 from django.views import generic
@@ -20,6 +20,7 @@ def blogs(request):
 
 def blog(request, blog_id):
     """Show a single topic and its details"""
+    blog = get_object_or_404(Blog, id=blog_id)
     blog = Blog.objects.get(id=blog_id)
     content = blog.content
     context = {'blog': blog}
