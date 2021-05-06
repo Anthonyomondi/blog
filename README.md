@@ -2,16 +2,16 @@
 
 Table of Contents
 
-  -General Info
+  	-General Info
 	-Technologies
 	-Setup
 	-Contributing
 	
-#General Info/Description
+##General Info/Description
 
 -Simple Blog you can register and log in to post content. you can also view other people's content
 
-#Technologies
+##Technologies
 
 -Techcnologies used include:
 	Python version 3.8.4
