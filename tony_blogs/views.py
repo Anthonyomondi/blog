@@ -45,3 +45,19 @@ def new_blog(request):
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'tony_blogs/new_blog.html', context)
+
+@login_required
+def delete_view(request, blog_id):
+    #dictionary for initial data with field names as keys
+    context = {}
+
+    #fetch the object related to passed id
+    blog = get_object_or_404(Blog, id=blog_id)
+
+    if request.method != "POST":
+        #delete object
+        blog.delete()
+        #after delete redirect to homepage
+        return redirect('tony_blogs:blogs')
+
+    return render(request, "tony_blogs/delete_view.html", context)
