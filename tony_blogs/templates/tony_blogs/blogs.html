@@ -2,6 +2,10 @@
 
 {% block page_header %}
 <h1>Blogs</h1>
+{% if user.is_authenticated %}
+  <h3><a class="btn btn-sm btn-primary" href="{% url 'tony_blogs:new_blog' %}" role="button">Add a new blog &raquo;</a>
+  </h3>
+{% endif %}
 {% endblock page_header %}
 
 {% block content %}
@@ -43,7 +47,4 @@
   </div>
   {% endblock sidebar %}
 
-  <h3><a class="btn btn-sm btn-primary" href="{% url 'tony_blogs:new_blog' %}" role="button">Add a new blog &raquo;</a>
-  </h3>
-
-  {% endblock content %}
+{% endblock content %}
