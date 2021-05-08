@@ -7,14 +7,14 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-8 mt-3 left">
+    <div class="col-md-9 mt-3 left">
       {% for blog in blogs reversed %}
-      <div class="card mb-3">
+      <div class="card text-white bg-dark mb-3">
         <div class="card-body">
           <h2 class="card-title">{{ blog.title }}</h2>
           <p class="card-text text-muted h6">{{ blog.author }}|{{ blog.date_created }}</p>
           <p class="card-text">{{ blog.content|slice:":200" }}</p>
-          <a href="{% url 'tony_blogs:blog' blog.id %}" class="btn btn-primary">Read More &raquo;</a>
+          <a href="{% url 'tony_blogs:blog' blog.id %}" class="btn btn-light btn-sm active" role="button" aria-pressed="true">Read More &raquo;</a>
         </div>
       </div>
       {% empty %}
@@ -32,18 +32,18 @@
   </style>
 
   <!-- Sidebar Widgets Column -->
-  <div class="col-md-4 float-right ">
-    <div class="card my-4">
+  <div class="col-md-3 float-right ">
+    <div class="card text-white bg-secondary my-4">
       <h5 class="card-header">About Us</h5>
       <div class="card-body">
         <p class="card-text"> Just a dude playing around with djangooo.</p>
-        <a href="https://github.com/Anthonyomondi" class="btn btn-danger">Know more!</a>
+        <a href="https://github.com/Tony-Otis" class="btn btn-info btn-sm">Know more!</a>
       </div>
     </div>
   </div>
   {% endblock sidebar %}
 
-  <h3><a class="btn btn-lg btn-danger" href="{% url 'tony_blogs:new_blog' %}" role="button">Add a new blog &raquo;</a>
+  <h3><a class="btn btn-sm btn-primary" href="{% url 'tony_blogs:new_blog' %}" role="button">Add a new blog &raquo;</a>
   </h3>
 
   {% endblock content %}
