@@ -1,4 +1,4 @@
-from django.shortcuts import (render, redirect, get_object_or_404)
+from django.shortcuts import (render, redirect, get_object_or_404, Http404)
 from django.contrib.auth.decorators import login_required
 
 from django.views import generic
@@ -45,6 +45,28 @@ def new_blog(request):
     # Display a blank or invalid form.
     context = {'form': form}
     return render(request, 'tony_blogs/new_blog.html', context)
+
+# update view for details
+def update_view(request, blog_id):
+    #edit existing blog
+    blog = Blog.objects.get(id=blog_id)
+    #make sure the post belongs to the current user
+    if blog.owner != request.user:
+        raise Http404
+
+    if request.method != 'POST':
+        #Initial request, pre-fill form with the current content
+        form = BlogForm(instance=blog)
+
+    else:
+        #POST data submitted, process data.
+        form = BlogForm(instance=blog, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('tony_blogs:blog', blog_id=blog.id)
+
+    context = {'blog':blog, 'form':form}
+    return render(request, 'tony_blogs/update_view.html', context)
 
 @login_required
 def delete_view(request, blog_id):
