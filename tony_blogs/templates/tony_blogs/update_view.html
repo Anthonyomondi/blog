@@ -1,0 +1,14 @@
+{% extends "tony_blogs/base.html" %}
+{% block content %}
+<div class="main">
+	<!-- Create a Form -->
+	<form action="{% url 'tony_blogs:update' blog.id %}"method="POST">
+		<!-- Security token by Django -->
+		{% csrf_token %}
+		<!-- form as paragraph -->
+		{{ form.as_p }}
+		<button name="submit">Save Changes</button>
+	</form>
+
+</div>
+{% endblock content %}
