@@ -1,13 +1,19 @@
 {% extends "tony_blogs/base.html" %}
+{% load crispy_forms_tags %}
 {% block content %}
+
+<h2>
+  <p>Edit Post:</p>
+</h2>
+
 <div class="main">
 	<!-- Create a Form -->
 	<form action="{% url 'tony_blogs:update' blog.id %}"method="POST">
 		<!-- Security token by Django -->
 		{% csrf_token %}
 		<!-- form as paragraph -->
-		{{ form.as_p }}
-		<button name="submit">Save Changes</button>
+		{{ form|crispy }}
+		<button name="submit" class="btn btn-outline-success"> Save Changes</button>
 	</form>
 
 </div>
