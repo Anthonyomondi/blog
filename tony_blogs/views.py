@@ -75,6 +75,9 @@ def delete_view(request, blog_id):
 
     #fetch the object related to passed id
     blog = get_object_or_404(Blog, id=blog_id)
+    #make sure the post belongs to the current user
+    if blog.owner != request.user:
+        raise Http404
 
     if request.method != "POST":
         #delete object
