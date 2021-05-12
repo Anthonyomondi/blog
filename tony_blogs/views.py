@@ -1,9 +1,9 @@
-from django.shortcuts import (render, redirect, get_object_or_404, Http404)
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import Http404, get_object_or_404, redirect, render
 from django.views import generic
-from .models import Blog
+
 from .forms import BlogForm
+from .models import Blog
 
 
 def index(request):
@@ -47,42 +47,45 @@ def new_blog(request):
     return render(request, 'tony_blogs/new_blog.html', context)
 
 # update view for details
+
+
 def update_view(request, blog_id):
-    #edit existing blog
+    # edit existing blog
     blog = Blog.objects.get(id=blog_id)
-    #make sure the post belongs to the current user
+    # make sure the post belongs to the current user
     if blog.owner != request.user:
         raise Http404
 
     if request.method != 'POST':
-        #Initial request, pre-fill form with the current content
+        # Initial request, pre-fill form with the current content
         form = BlogForm(instance=blog)
 
     else:
-        #POST data submitted, process data.
+        # POST data submitted, process data.
         form = BlogForm(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('tony_blogs:blog', blog_id=blog.id)
 
-    context = {'blog':blog, 'form':form}
+    context = {'blog': blog, 'form': form}
     return render(request, 'tony_blogs/update_view.html', context)
+
 
 @login_required
 def delete_view(request, blog_id):
-    #dictionary for initial data with field names as keys
+    # dictionary for initial data with field names as keys
     context = {}
 
-    #fetch the object related to passed id
+    # fetch the object related to passed id
     blog = get_object_or_404(Blog, id=blog_id)
-    #make sure the post belongs to the current user
+    # make sure the post belongs to the current user
     if blog.owner != request.user:
         raise Http404
 
     if request.method != "POST":
-        #delete object
+        # delete object
         blog.delete()
-        #after delete redirect to homepage
+        # after delete redirect to homepage
         return redirect('tony_blogs:blogs')
 
     return render(request, "tony_blogs/delete_view.html", context)
