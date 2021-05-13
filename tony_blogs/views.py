@@ -11,17 +11,17 @@ def index(request):
     return render(request, 'tony_blogs/index.html')
 
 
-def blogs(request):
+def blog_list(request):
     """Show all blogs"""
     blogs = Blog.objects.order_by('date_created')
     context = {'blogs': blogs}
     return render(request, 'tony_blogs/blogs.html', context)
 
 
-def blog(request, blog_id):
+def blog_detail(request, blog_id):
     """Show a single topic and its details"""
     blog = get_object_or_404(Blog, id=blog_id)
-    blog = Blog.objects.get(id=blog_id)
+    #blog = Blog.objects.get(id=blog_id)
     content = blog.content
     context = {'blog': blog}
     return render(request, 'tony_blogs/blog.html', context)
