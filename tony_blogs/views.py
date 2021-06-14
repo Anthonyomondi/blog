@@ -21,8 +21,6 @@ def blogs(request):
 def blog(request, blog_id):
     """Show a single topic and its details"""
     blog = get_object_or_404(Blog, id=blog_id)
-    blog = Blog.objects.get(id=blog_id)
-    content = blog.content
     context = {'blog': blog}
     return render(request, 'tony_blogs/blog.html', context)
 
@@ -82,10 +80,11 @@ def delete_view(request, blog_id):
     if blog.owner != request.user:
         raise Http404
 
-    if request.method != "POST":
+    if request.method == "POST":
         # delete object
         blog.delete()
         # after delete redirect to homepage
         return redirect('tony_blogs:blogs')
+        #return HttpResponseRedirect("tony_blogs:blogs")
 
-    return render(request, "tony_blogs/delete_view.html", context)
+    return render(request, 'tony_blogs/delete_view.html', context)
