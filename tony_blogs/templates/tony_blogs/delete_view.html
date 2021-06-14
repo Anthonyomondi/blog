@@ -1,19 +1,13 @@
 {% extends "tony_blogs/base.html" %}
-{% load bootstrap4 %}
-
 {% block content %}
-
-<div class="content-section">
+<div class="main">
+    <!-- Create a Form -->
     <form method="POST">
+        <!-- Security token by Django -->
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Delete Post</legend>
-            <h2>Are you sure you want to delete the post "{{ blog.title }}"</h2>
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-danger" type="submit">Yes, Delete</button>
-            <a class="btn btn-outline-secondary" href="{% url 'tony_blogs:blog' blog.id %}">Cancel</a>
-        </div> 
+        Are you want to delete this item ?
+        <input type="submit" value="Yes" />
+        <a href={% url "tony_blogs:blogs" %}>Cancel </a>
     </form>
 </div>
 
