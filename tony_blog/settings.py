@@ -18,7 +18,6 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -35,13 +34,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
 
-    #My apps
+    # My apps
     'tony_blogs',
     'users',
-    #Third party apps
+    # Third party apps
     'bootstrap4',
 
-    #Django default apps
+    # Django default apps
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,12 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #crispy forms
+    # crispy forms
     'crispy_forms',
 
-    'verify_email.apps.VerifyEmailConfig',
-
-    
 ]
 
 MIDDLEWARE = [
@@ -139,7 +135,7 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-#My settings
+# My settings
 LOGIN_URL = 'users:login'
 
 # Heroku settings.
@@ -149,13 +145,3 @@ if os.environ.get('DEBUG') == 'TRUE':
     DEBUG = True
 elif os.environ.get('DEBUG') == 'FALSE':
     DEBUG = False
-
-#verify email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = os.environ.get('EMAIL_ID') 
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PW')
-
-DEFAULT_FROM_EMAIL = 'noreply<no_reply@domain.com>'
