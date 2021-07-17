@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import Http404, get_object_or_404, redirect, render
 from django.views import generic
 
+
 from .forms import BlogForm
 from .models import Blog
 
@@ -85,6 +86,5 @@ def delete_view(request, blog_id):
         blog.delete()
         # after delete redirect to homepage
         return redirect('tony_blogs:blogs')
-        #return HttpResponseRedirect("tony_blogs:blogs")
 
     return render(request, 'tony_blogs/delete_view.html', context)
