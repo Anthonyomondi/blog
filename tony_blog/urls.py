@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('users.urls')),
     path('', include('tony_blogs.urls')),
+    path('verification/', include('verify_email.urls')),
     
 ]
