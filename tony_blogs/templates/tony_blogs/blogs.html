@@ -16,7 +16,7 @@
       <div class="card text-white bg-dark mb-3">
         <div class="card-body">
           <h2 class="card-title">{{ blog.title }}</h2>
-          <p class="card-text text-muted h6">{{ blog.author }}|{{ blog.date_created }}</p>
+          <p class="card-text text-muted h6">{{ blog.owner }}|{{ blog.date_created }}</p>
           <p class="card-text">{{ blog.content|slice:":200" }}</p>
           <a href="{% url 'tony_blogs:blog' blog.id %}" class="btn btn-light btn-sm active" role="button" aria-pressed="true">Read More &raquo;</a>
         </div>
