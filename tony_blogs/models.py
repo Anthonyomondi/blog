@@ -4,7 +4,6 @@ from django.db import models
 
 class Blog(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    author = models.CharField(max_length=50)
     content = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now_add=True)
