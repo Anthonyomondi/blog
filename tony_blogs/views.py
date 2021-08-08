@@ -3,7 +3,7 @@ from django.shortcuts import Http404, get_object_or_404, redirect, render
 from django.views import generic
 
 
-from .forms import BlogForm
+from .forms import BlogForm, user_commentForm
 from .models import Blog
 
 
@@ -23,6 +23,22 @@ def blog(request, blog_id):
     """Show a single topic and its details"""
     blog = get_object_or_404(Blog, id=blog_id)
     context = {'blog': blog}
+
+    comments = blog.comments.filter(active=True)
+    new_comment = None
+    # Comment posted
+    if request.method == 'POST':
+        comment_form = user_commentForm(data=request.POST)
+        if comment_form.is_valid():
+
+            # Create Comment object but without saving to database
+            new_comment = comment_form.save(commit=False)
+            # Assign the current post to the comment
+            new_comment.blog = blog
+            # Save the comment to the database
+            new_comment.save()
+    else:
+        comment_form = user_commentForm()
     return render(request, 'tony_blogs/blog.html', context)
 
 
