@@ -4,7 +4,7 @@ from django.views import generic
 
 
 from .forms import BlogForm, user_commentForm
-from .models import Blog
+from .models import Blog, user_comment
 
 
 def index(request):
@@ -22,23 +22,20 @@ def blogs(request):
 def blog(request, blog_id):
     """Show a single topic and its details"""
     blog = get_object_or_404(Blog, id=blog_id)
-    context = {'blog': blog}
 
-    comments = blog.comments.filter(active=True)
-    new_comment = None
     # Comment posted
     if request.method == 'POST':
-        comment_form = user_commentForm(data=request.POST)
+        comment_form = user_commentForm(request.POST or None)
         if comment_form.is_valid():
 
-            # Create Comment object but without saving to database
-            new_comment = comment_form.save(commit=False)
-            # Assign the current post to the comment
-            new_comment.blog = blog
-            # Save the comment to the database
-            new_comment.save()
+            content = request.POST.get('content')
+            comment = user_comment.objects.create(blog = blog, user = request.user, content = content)
+            comment.save()
+            return redirect(blog.get_absolute_url())
     else:
         comment_form = user_commentForm()
+    context = {'blog': blog,
+                'comment_form': comment_form}
     return render(request, 'tony_blogs/blog.html', context)
 
 
