@@ -22,4 +22,35 @@
   </div>
 </div>
 
+<form method="POST">
+  {% csrf_token %}
+    {{comment_form.as_p}}
+    <input type="submit" name="comment" class="btn btn-warning">
+  
+</form>    
+
+<div class="main-comment-section">
+  {{comments.count}} Comment{{comments|pluralize}}
+</div>
+
+{% for comment in comments %}
+  <blockquote class="blockquote">
+    <p>{{ comment.content}}</p>
+    <footer class="blockquote-footer">
+      By <cite>{{comment.user|capfirst}}
+
+        {% ifequal  object.author.id user.id%}
+        <a href="{% url 'tony_blogs' comment.id %}" style="color: #585858;"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+        {% endifequal %}
+        {% ifequal comment.user.id user.id%}
+            {% ifequal comment.user.id object.author.id%}
+            {% else %}
+            <a href="{% url 'tony_blogs' comment.id %}" style="color: #585858;"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+            {% endifequal %}
+        {% endifequal %}
+        </cite> 
+    </footer>
+  </blockquote>
+{% endfor %}
+
 {% endblock content %}
