@@ -25,15 +25,15 @@ def blog(request, blog_id):
 
     # Comment posted
     if request.method == 'POST':
-        comment_form = user_commentForm(request.POST or None)
+        comment_form = user_commentForm(request.POST)
         if comment_form.is_valid():
 
             content = request.POST.get('content')
-            comment = user_comment.objects.create(blog = blog, user = request.user, content = content)
+            comment = user_comment.objects.create(instance = blog, user = request.user, content = content)
             comment.save()
             return redirect(blog.get_absolute_url())
     else:
-        comment_form = user_commentForm()
+        comment_form = user_commentForm(data=request.POST)
     context = {'blog': blog,
                 'comment_form': comment_form}
     return render(request, 'tony_blogs/blog.html', context)
