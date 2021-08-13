@@ -1,14 +1,25 @@
 {% extends 'tony_blogs/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block page_header %}
   <h3>{{ Blog }}</h3>
 {% endblock page_header %}
 
 {% block content %}
+<style>
+  .silver-background{
+    background-color: silver;
+  }
+  .card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    margin-bottom: 10px; /* Added */
+}
+</style>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top">
+    <div class="col-md-8 card mb-4  mt-3 left  top silver-background">
       <div class="card-body">
         <h1>{% block title %} {{ blog.title }} {% endblock title %}</h1>
         <p class=" text-muted">{{blog.owner }} | {{ blog.date_created }}</p>
@@ -24,16 +35,16 @@
 
 <form method="POST">
   {% csrf_token %}
-    {{comment_form.as_p}}
-    <input type="submit" name="comment" class="btn btn-warning">
+    {{comment_form|crispy}}
+    <a input type="submit" class="btn btn-success">Comment</a>
   
 </form>    
 
-<div class="main-comment-section">
+<!-- <div class="main-comment-section">
   {{comments.count}} Comment{{comments|pluralize}}
-</div>
+</div> -->
 
-{% for comment in comments %}
+<!-- {% for comment in comments %}
   <blockquote class="blockquote">
     <p>{{ comment.content}}</p>
     <footer class="blockquote-footer">
@@ -50,7 +61,7 @@
         {% endifequal %}
         </cite> 
     </footer>
-  </blockquote>
+  </blockquote> -->
 {% endfor %}
 
 {% endblock content %}
