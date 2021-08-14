@@ -21,7 +21,8 @@ def blogs(request):
 
 def blog(request, blog_id):
     """Show a single topic and its details"""
-    blog = get_object_or_404(Blog, id=blog_id)
+    #blog = get_object_or_404(Blog, id=blog_id)
+    blog = Blog.objects.get(id=blog_id)
     context = {'blog': blog,}
     return render(request, 'tony_blogs/blog.html', context)
 
