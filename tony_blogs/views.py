@@ -22,20 +22,7 @@ def blogs(request):
 def blog(request, blog_id):
     """Show a single topic and its details"""
     blog = get_object_or_404(Blog, id=blog_id)
-
-    # Comment posted
-    if request.method == 'POST':
-        comment_form = user_commentForm(request.POST)
-        if comment_form.is_valid():
-
-            content = request.POST.get('content')
-            comment = user_comment.objects.create(instance = blog, user = request.user, content = content)
-            comment.save()
-            return redirect(blog.get_absolute_url())
-    else:
-        comment_form = user_commentForm(data=request.POST)
-    context = {'blog': blog,
-                'comment_form': comment_form}
+    context = {'blog': blog,}
     return render(request, 'tony_blogs/blog.html', context)
 
 
@@ -101,3 +88,15 @@ def delete_view(request, blog_id):
         return redirect('tony_blogs:blogs')
 
     return render(request, 'tony_blogs/delete_view.html', context)
+
+# # Comment posted
+# if request.method == 'POST':
+#     comment_form = user_commentForm(request.POST)
+#     if comment_form.is_valid():
+
+#         content = request.POST.get('content')
+#         comment = user_comment.objects.create(instance = blog, user = request.user, content = content)
+#         comment.save()
+#         return redirect(blog.get_absolute_url())
+# else:
+#     comment_form = user_commentForm(data=request.POST)
