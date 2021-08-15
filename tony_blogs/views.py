@@ -23,7 +23,8 @@ def blog(request, blog_id):
     """Show a single topic and its details"""
     #blog = get_object_or_404(Blog, id=blog_id)
     blog = Blog.objects.get(id=blog_id)
-    context = {'blog': blog,}
+    user_comment = blog.user_comment.order_by('-date_created')  
+    context = {'blog': blog, 'user_comment':user_comment}
     return render(request, 'tony_blogs/blog.html', context)
 
 
