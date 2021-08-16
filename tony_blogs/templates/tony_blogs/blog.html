@@ -8,20 +8,24 @@
 {% block content %}
 <style>
   .silver-background{
-    background-color: silver;
+    background-color: rgba(45, 45, 45, 0.1);
   }
   .card {
     margin: 0 auto; /* Added */
     float: none; /* Added */
     margin-bottom: 10px; /* Added */
 }
+p{
+  text-align: justify;
+}
 </style>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 card mb-4  mt-3 left  top silver-background">
+    <div class="col-auto card mb-4  mt-3 left  top silver-background">
       <div class="card-body">
         <h1>{% block title %} {{ blog.title }} {% endblock title %}</h1>
+        <hr>
         <p class=" text-muted">{{blog.owner }} | {{ blog.date_created }}</p>
         <p class="card-text ">{{ blog.content | safe }}</p>
         {% if user.is_authenticated %}
