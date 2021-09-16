@@ -3,8 +3,8 @@ from django.shortcuts import Http404, get_object_or_404, redirect, render
 from django.views import generic
 
 
-from .forms import BlogForm, user_commentForm
-from .models import Blog, user_comment
+from .forms import BlogForm
+from .models import Blog
 
 
 def index(request):
@@ -21,10 +21,8 @@ def blogs(request):
 
 def blog(request, blog_id):
     """Show a single topic and its details"""
-    #blog = get_object_or_404(Blog, id=blog_id)
     blog = Blog.objects.get(id=blog_id)
-    #user_comment = user_comment.objects.get(id=request)  
-    context = {'blog': blog} #, 'user_comment':user_comment}
+    context = {'blog': blog}
     return render(request, 'tony_blogs/blog.html', context)
 
 
@@ -90,15 +88,3 @@ def delete_view(request, blog_id):
         return redirect('tony_blogs:blogs')
 
     return render(request, 'tony_blogs/delete_view.html', context)
-
-# # Comment posted
-# if request.method == 'POST':
-#     comment_form = user_commentForm(request.POST)
-#     if comment_form.is_valid():
-
-#         content = request.POST.get('content')
-#         comment = user_comment.objects.create(instance = blog, user = request.user, content = content)
-#         comment.save()
-#         return redirect(blog.get_absolute_url())
-# else:
-#     comment_form = user_commentForm(data=request.POST)
