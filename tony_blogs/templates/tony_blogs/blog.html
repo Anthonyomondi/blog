@@ -32,10 +32,13 @@
             <a href="{% url 'tony_blogs:update' blog.id %}" class="btn-sm btn-success">Update</a>
             <a href="{% url 'tony_blogs:delete' blog.id %}" class="btn-sm btn-danger">Delete &raquo;</a>
           {% endif %}
+          <br/><br/>
           <h2>Comments</h2>
           {% if not blog.comments.all %}
-            No comments yet ...<a href="#">Add one</a>
+            No comments yet ...<a href="{% url 'tony_blogs:comment' blog.id %}">Add one</a>
           {% else %}
+          <a href="{% url 'tony_blogs:comment' blog.id %}">Add Comment</a>
+          <br/><br/>
             {% for comment in blog.comments.all %}
               <strong>
                 {{ comment.author }} | {{ comment.date_created }}
@@ -44,6 +47,9 @@
               {{ comment.content }}
             {% endfor %}
           {% endif %}
+          <br/>
+          <a href="{% url 'tony_blogs:comment' blog.id %}">Add Comment</a>
+          <br/>
         </div>
       </div>
     </div>
