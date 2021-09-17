@@ -3,8 +3,8 @@ from django.shortcuts import Http404, get_object_or_404, redirect, render
 from django.views import generic
 
 
-from .forms import BlogForm
-from .models import Blog
+from .forms import BlogForm, user_commentForm
+from .models import Blog, user_comment
 
 
 def index(request):
@@ -25,6 +25,23 @@ def blog(request, blog_id):
     context = {'blog': blog}
     return render(request, 'tony_blogs/blog.html', context)
 
+def new_comment(request, blog_id):
+    """Add new comment."""
+    if request.method != 'POST':
+        # No data submitted create a blank form
+        form = user_commentForm()
+    else:
+        # POST data submitted; process data.
+        form = user_commentForm(data=request.POST)
+        if form.is_valid():
+            new_comment = form.save(commit=False)
+            new_comment.owner = request.user
+            new_comment.save()
+            return redirect('tony_blogs:blog')
+
+    # Display a blank or invalid form.
+    context = {'blog': blog, 'form': form}
+    return render(request, 'tony_blogs/new_comment.html', context)
 
 @login_required
 def new_blog(request):
