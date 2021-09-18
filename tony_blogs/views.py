@@ -27,20 +27,20 @@ def blog(request, blog_id):
 
 def new_comment(request, blog_id):
     """Add new comment."""
+    blog= get_object_or_404(Blog, id=blog_id)
     if request.method != 'POST':
-        # No data submitted create a blank form
-        form = user_commentForm()
-    else:
-        # POST data submitted; process data.
-        form = user_commentForm(data=request.POST)
+        
+        form = user_commentForm(request.POST)
         if form.is_valid():
             new_comment = form.save(commit=False)
-            new_comment.owner = request.user
+            new_comment.blog = blog
             new_comment.save()
-            return redirect('tony_blogs:blog')
+            return redirect('tony_blogs:blog', id=blog.id)
+    else:
+        
+        form = user_commentForm()
 
-    # Display a blank or invalid form.
-    context = {'blog': blog, 'form': form}
+    context = {'form': form}
     return render(request, 'tony_blogs/new_comment.html', context)
 
 @login_required
