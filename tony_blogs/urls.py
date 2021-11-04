@@ -17,6 +17,4 @@ urlpatterns = [
     path('<int:blog_id>/delete_view', views.delete_view, name='delete'),
     #page for updating blog
     path('update_view/<int:blog_id>/', views.update_view, name='update'),
-    #page for adding comment
-    path('blogs/<int:blog_id>/comment/', views.new_comment, name='comment'),
 ]

@@ -33,56 +33,9 @@
             <a href="{% url 'tony_blogs:delete' blog.id %}" class="btn-sm btn-danger">Delete &raquo;</a>
           {% endif %}
           <br/><br/>
-          <h2>Comments</h2>
-          {% if not blog.comments.all %}
-            No comments yet ...<a href="{% url 'tony_blogs:comment' blog.id %}">Add one</a>
-          {% else %}
-          <a href="{% url 'tony_blogs:comment' blog.id %}">Add Comment</a>
-          <br/><br/>
-            {% for comment in blog.comments.all %}
-              <strong>
-                {{ comment.author }} | {{ comment.date_created }}
-              </strong>
-              <br>
-              {{ comment.content }}
-            {% endfor %}
-          {% endif %}
-          <br/>
-          <a href="{% url 'tony_blogs:comment' blog.id %}">Add Comment</a>
-          <br/>
+         
         </div>
       </div>
     </div>
   </div>
 {% endblock content %}
-
-<!-- <form method="POST">
-  {% csrf_token %}
-    {{comment_form|crispy}}
-    <a input type="submit" class="btn btn-success">Comment</a>
-  
-</form>     -->
-
-<!-- <div class="main-comment-section">
-  {{comments.count}} Comment{{comments|pluralize}}
-</div> -->
-
-<!-- {% for comment in comments %}
-  <blockquote class="blockquote">
-    <p>{{ comment.content}}</p>
-    <footer class="blockquote-footer">
-      By <cite>{{comment.user|capfirst}}
-
-        {% ifequal  object.author.id user.id%}
-        <a href="{% url 'tony_blogs' comment.id %}" style="color: #585858;"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-        {% endifequal %}
-        {% ifequal comment.user.id user.id%}
-            {% ifequal comment.user.id object.author.id%}
-            {% else %}
-            <a href="{% url 'tony_blogs' comment.id %}" style="color: #585858;"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-            {% endifequal %}
-        {% endifequal %}
-        </cite> 
-    </footer>
-  </blockquote> -->
-<!-- {% endfor %} -->

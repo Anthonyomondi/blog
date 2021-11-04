@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import Http404, get_object_or_404, redirect, render
-from django.views import generic
 
 
-from .forms import BlogForm, user_commentForm
-from .models import Blog, user_comment
+from .forms import BlogForm
+from .models import Blog
 
 
 def index(request):
@@ -24,24 +23,6 @@ def blog(request, blog_id):
     blog = Blog.objects.get(id=blog_id)
     context = {'blog': blog}
     return render(request, 'tony_blogs/blog.html', context)
-
-def new_comment(request, blog_id):
-    """Add new comment."""
-    blog= get_object_or_404(Blog, id=blog_id)
-    if request.method != 'POST':
-        
-        form = user_commentForm(request.POST)
-        if form.is_valid():
-            new_comment = form.save(commit=False)
-            new_comment.blog = blog
-            new_comment.save()
-            return redirect('tony_blogs:blog', id=blog.id)
-    else:
-        
-        form = user_commentForm()
-
-    context = {'form': form}
-    return render(request, 'tony_blogs/new_comment.html', context)
 
 @login_required
 def new_blog(request):
