@@ -5,7 +5,7 @@ from .models import Blog
 
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'owner', 'date_created')
-    list_filter = ['date_created', 'updated_on']
+    list_filter = ['date_created']
     search_fields = ['title', 'content']
 
 
